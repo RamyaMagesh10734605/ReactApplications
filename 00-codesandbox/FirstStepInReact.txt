@@ -1,0 +1,27 @@
+//Tried this with react.new(use it in browser), it’s a codesandbox for react. Replaced App() with the below as a first step
+
+
+import { useState } from "react";
+
+export default function App() {
+
+  const [advice, setAdvice] = useState("");
+  const [count, setCount] = useState(0);
+
+  async function getAdvice(){
+     const res = await fetch("https://api.adviceslip.com/advice");
+     const data = await res.json();
+     setCount = (count) => count + 1
+     setAdvice(data.slip.advice);
+    }
+  return (
+    <div className="App">
+      <h1>{advice}</h1>
+      <button onClick={getAdvice}>GetAdvice</button>
+      <p> You have read <strong>{count}</strong> number of advice.</p>
+    </div>
+  );
+}
+
+
+
